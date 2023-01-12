@@ -26,7 +26,7 @@ class EndpointStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'location' => 'required|string|starts_with:/',
+            'location' => 'required|string',
             'frequency' => ['required', new Enum(EndpointFrequency::class)],
         ];
     }

@@ -17,6 +17,11 @@ class Site extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function url()
+    {
+        return $this->scheme . '://' . $this->domain;
+    }
+
     public function endpoints(): HasMany
     {
         return $this->hasMany(Endpoint::class);
