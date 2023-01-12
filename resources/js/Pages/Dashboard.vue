@@ -77,7 +77,7 @@ const createEndpoint = () => {
                 </form>
 
                 <div class="mt-8">
-                    <h2 class="font-semibold text-lg text-gray-800 leading-tight">Currently monitoring (x)</h2>
+                    <h2 class="font-semibold text-lg text-gray-800 leading-tight">Currently monitoring ({{ endpoints.data.length }})</h2>
                     <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8 mt-3">
                         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                             <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -115,17 +115,17 @@ const createEndpoint = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mt-8 flex flex-col">
-                <h2 class="font-semibold text-lg text-gray-800 leading-tight">Notification channels</h2>
+                <div class="mt-8 flex flex-col">
+                    <h2 class="font-semibold text-lg text-gray-800 leading-tight">Notification channels</h2>
 
-                <div class="grid grid-cols-3 gap-12 mt-4">
+                    <div class="grid grid-cols-3 gap-12 mt-4">
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="mt-8">
-                <button class="text-red-500 text-sm">Delete site</button>
+                <div class="mt-8">
+                    <button class="text-red-500 text-sm">Delete site</button>
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>
