@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\Endpoint;
+use Exception;
+use Http;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class PerformEndpointCheck
+class PerformEndpointCheck implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -34,6 +36,13 @@ class PerformEndpointCheck
     public function handle()
     {
         // http request
+        try {
+            $response = Http::get($this->endpoint->url());
+
+            \Log::info($response->status());
+        }catch (Exception $e) {
+
+        }
 
         //update endpoint with the new next_check
         $this->endpoint->update([
