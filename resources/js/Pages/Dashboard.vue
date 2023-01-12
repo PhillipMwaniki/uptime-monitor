@@ -9,18 +9,18 @@ import InputError from "@/Components/InputError.vue";
 
 const page = usePage()
 
-defineProps({
+const props = defineProps({
     site: Object,
     sites: Object,
 })
 
 const endpointForm = useForm({
     location: null,
-    frequency: null
+    frequency: page.props.value.endpointFrequencies.data[0].frequency
 })
 
 const createEndpoint = () => {
-    endpointForm.post('/endpoints', {
+    endpointForm.post(`/sites/${props.site.data.id}/endpoints`, {
         preserveScroll: true,
         onSuccess: () => {
             endpointForm.reset()
@@ -62,8 +62,8 @@ const createEndpoint = () => {
                     <div>
                         <InputLabel for="frequency" value="Frequency" class="sr-only"/>
                         <select name="frequency" id="frequency" class="border-gray-300 focus:border-indigo-500
-                        focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm">
-                            <option value="frequency.frequency"
+                        focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm" v-model="endpointForm.frequency">
+                            <option :value="frequency.frequency"
                                     v-for="frequency in page.props.value.endpointFrequencies.data"
                                     :key="frequency.frequency"
                             >

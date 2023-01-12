@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Endpoint;
 use App\Models\Site;
+use App\Observers\EndpointObserver;
 use App\Observers\SiteObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -27,9 +29,10 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Site::observe(SiteObserver::class);
+        Endpoint::observe(EndpointObserver::class);
     }
 
     /**
@@ -37,7 +40,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return bool
      */
-    public function shouldDiscoverEvents()
+    public function shouldDiscoverEvents(): bool
     {
         return false;
     }

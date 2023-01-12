@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EndpointsStoreController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteStoreController;
 use Illuminate\Foundation\Application;
@@ -18,7 +19,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', static function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -28,7 +29,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard/{site?}', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
-Route::post('/sites', SiteStoreController::class)->middleware('auth')->name('stites.store');
+Route::post('/sites', SiteStoreController::class)->middleware('auth')->name('sites.store');
+Route::post('/sites/{site}/endpoints', EndpointsStoreController::class)
+    ->middleware('auth')
+    ->name('endpoints.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
