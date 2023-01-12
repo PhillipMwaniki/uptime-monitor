@@ -6,6 +6,14 @@ use App\Models\Site;
 
 class SiteObserver
 {
+
+    public function creating(Site $site)
+    {
+        $parsed = parse_url($site->domain);
+
+        $site->scheme = $parsed['scheme'];
+        $site->domain = $parsed['host'];
+    }
     public function updating(Site $site): void
     {
         if (array_key_exists('default', $site->getDirty())) {

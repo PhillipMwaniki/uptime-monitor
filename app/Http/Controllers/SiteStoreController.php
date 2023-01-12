@@ -8,6 +8,9 @@ class SiteStoreController extends Controller
 {
     public function __invoke(Request $request)
     {
-        dd($request->all());
+        $site = $request->user()->sites()->create($request->only(['domain']));
+
+        return redirect()->route('dashboard', $site);
+
     }
 }
