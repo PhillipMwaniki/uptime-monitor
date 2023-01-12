@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\EndpointFrequency;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class EndpointStoreRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class EndpointStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('storeEndpoint', $this->site);
     }
 
     /**
@@ -25,7 +27,7 @@ class EndpointStoreRequest extends FormRequest
     {
         return [
             'location' => 'required|string|starts_with:/',
-            'frequency' => 'required|integer',
+            'frequency' => ['required', new Enum(EndpointFrequency::class)],
         ];
     }
 }
