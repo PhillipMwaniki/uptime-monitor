@@ -7,12 +7,12 @@ use App\Models\Site;
 class SiteObserver
 {
 
-    public function creating(Site $site)
+    public function creating(Site $site): void
     {
         $parsed = parse_url($site->domain);
 
         $site->scheme = $parsed['scheme'];
-        $site->domain = $parsed['host'];
+        $site->domain = $parsed['host'] . ':' . $parsed['port'];
     }
     public function updating(Site $site): void
     {
