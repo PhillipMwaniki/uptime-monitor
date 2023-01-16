@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
     }
 
-    protected function shortSchedule(ShortSchedule $shortSchedule)
+    protected function shortSchedule(ShortSchedule $shortSchedule): void
     {
         $shortSchedule->command('checks:perform')->everySecond();
     }

@@ -33,15 +33,20 @@ class PerformEndpointCheck implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         // http request
         try {
+            \Log::info('here: '. $this->endpoint->url());
             $response = Http::get($this->endpoint->url());
 
-            \Log::info($response->status());
+            $this->endpoint->checks()->create([
+                'response_code' => $response->status(),
+                'response_body' => !$response->successful() ? $response->body() : null,
+            ]);
         }catch (Exception $e) {
-
+            \Log::warning('http issue');
+            \Log::warning($e->getMessage());
         }
 
         //update endpoint with the new next_check

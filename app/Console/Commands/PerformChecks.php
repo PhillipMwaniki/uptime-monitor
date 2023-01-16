@@ -27,12 +27,13 @@ class PerformChecks extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        $endpoints = Endpoint::where('next_check', '<=', now())->each(function ($endpoint){
+        $endpoints = Endpoint::where('next_check', '>=', now())->get();
+        $endpoints->each(function ($endpoint) {
+            \Log::info('Checking');
             PerformEndpointCheck::dispatch($endpoint);
         });
-
 
         return Command::SUCCESS;
     }
