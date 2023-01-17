@@ -21,6 +21,9 @@ class EndpointResource extends JsonResource
           'frequency_label' => EndpointFrequency::from($this->frequency)->label(),
           'frequency_value' => EndpointFrequency::from($this->frequency)->value,
           'latest_check' => CheckResource::make($this->check),
+          'url' => $this->url(),
+          'site' => SiteResource::make($this->site),
+          'checks' => CheckResource::collection($this->checks),
         ];
     }
 }
