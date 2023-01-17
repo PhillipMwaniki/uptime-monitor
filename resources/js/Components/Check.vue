@@ -1,5 +1,8 @@
 <script setup>
+import { ref } from "vue";
+import { VueFinalModal } from "vue-final-modal";
 
+const showResponseBodyModal = ref(false);
 defineProps({
     check: Object
 })
@@ -19,9 +22,20 @@ defineProps({
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <template v-if="check.response_body">
-                <button>View</button>
+                <button @click="showResponseBodyModal = true">View</button>
             </template>
             <template v-else>-</template>
         </td>
     </tr>
+    <VueFinalModal
+        v-model="showResponseBodyModal"
+        classes="flex justify-center items-start pt-16 md:pt-24 mx-4"
+        content-class="relative max-h-full rounded bg-white w-full max-w-2xl p-4 md:p-6"
+        overlay-class="bg-gradient-to-r from-gray-800 to-gray-500 opacity-50"
+        :esc-to-close="true"
+    >
+        <h2 class="font-semibold text-lg text-gray-800 leading-tight">What we got</h2>
+
+        <textarea :value="check.response_body" readonly class="border-gray-300 rounded-md w-full" rows="10"></textarea>
+    </VueFinalModal>
 </template>
