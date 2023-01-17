@@ -25,6 +25,11 @@ class EndpointPolicy
         return $endpoint->site->user_id === $user->id;
     }
 
+    public function show(User $user, Endpoint $endpoint): bool
+    {
+        return $endpoint->site->user_id === $user->id;
+    }
+
     public function update(User $user, Endpoint $endpoint): bool
     {
         return $endpoint->site->user_id === $user->id;

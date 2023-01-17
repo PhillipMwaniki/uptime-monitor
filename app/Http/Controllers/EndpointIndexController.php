@@ -10,9 +10,12 @@ class EndpointIndexController extends Controller
 {
     public function __construct() { }
 
-    public function __invoke(Request $request, Endpoint $endpoint)
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function __invoke(Endpoint $endpoint)
     {
-        //authorize
+        $this->authorize('show', $endpoint);
 
         return inertia()->render('Endpoint', [
             'endpoint' => EndpointResource::make($endpoint)
