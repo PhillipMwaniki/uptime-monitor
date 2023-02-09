@@ -13,7 +13,7 @@ class Site extends Model
     protected $fillable = ['default', 'domain', 'scheme', 'notification_emails'];
 
     protected $casts = [
-        'notification_emails'
+        'notification_emails' => 'array'
     ];
 
     public function user()

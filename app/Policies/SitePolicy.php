@@ -26,4 +26,11 @@ class SitePolicy
         return $user->id === $site->user_id;
 
     }
+
+    public function canStoreNotificationChannels(User $user, Site $site): bool
+    {
+
+        return $user->id === $site->user_id;
+
+    }
 }
