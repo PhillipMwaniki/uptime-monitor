@@ -6,6 +6,8 @@ use App\Http\Controllers\EndpointIndexController;
 use App\Http\Controllers\EndpointsStoreController;
 use App\Http\Controllers\EndpointUpdateController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteNotificationEmailDestroyController;
+use App\Http\Controllers\SiteNotificationEmailStoreController;
 use App\Http\Controllers\SiteStoreController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +50,12 @@ Route::get('/endpoints/{endpoint}', EndpointIndexController::class)
 Route::patch('/endpoints/{endpoint}', EndpointUpdateController::class)
      ->middleware('auth')
      ->name('endpoints.patch');
+
+Route::post('/sites/{site}/notifications/emails', SiteNotificationEmailStoreController::class)
+    ->middleware('auth');
+
+Route::delete('/sites/{site}/notifications/emails', SiteNotificationEmailDestroyController::class)
+    ->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

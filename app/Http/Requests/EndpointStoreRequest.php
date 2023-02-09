@@ -15,7 +15,7 @@ class EndpointStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('storeEndpoint', $this->site);
+        return $this->user()->can('canStoreNotificationChannels', $this->site);
     }
 
     /**
