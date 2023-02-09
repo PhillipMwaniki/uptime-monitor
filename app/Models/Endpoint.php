@@ -18,6 +18,18 @@ class Endpoint extends Model
         'next_check',
     ];
 
+    public function uptimePercentage(): float|int|null
+    {
+        if (!$this->checks->count()) {
+            return null;
+        }
+
+        return number_format(
+            ($this->successful_checks_count / $this->checks->count()) * 100,
+            2
+        );
+    }
+
     public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class);
