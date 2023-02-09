@@ -10,7 +10,11 @@ class Site extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['default', 'domain', 'scheme'];
+    protected $fillable = ['default', 'domain', 'scheme', 'notification_emails'];
+
+    protected $casts = [
+        'notification_emails'
+    ];
 
     public function user()
     {
