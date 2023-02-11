@@ -42,7 +42,6 @@ class PerformEndpointCheck implements ShouldQueue, ShouldBeUnique
     {
         // http request
         try {
-            \Log::info('here: '. $this->endpoint->url());
             $response = Http::get($this->endpoint->url());
 
             $this->endpoint->checks()->create([
