@@ -14,15 +14,17 @@ class DashboardController extends Controller
     public function __invoke(Request $request, Site $site)
     {
 
+        $site->load('endpoints.site', 'endpoints.checks', 'endpoints.check');
+
         if (!$site->exists) {
             $site = auth()->user()?->sites()->whereDefault(true)->first() ?? auth()->user()?->sites()->first();
         }
 
-        $site->update(['default' => true]);
+        $site && $site->update(['default' => true]);
 
         return inertia()->render('Dashboard', [
-            'site' => SiteResource::make($site),
-            'endpoints' => EndpointResource::collection($site->endpoints),
+            'site' => $site ? SiteResource::make($site) : null,
+            'endpoints' => $site ? EndpointResource::collection($site->endpoints) : null,
         ]);
     }
 }
