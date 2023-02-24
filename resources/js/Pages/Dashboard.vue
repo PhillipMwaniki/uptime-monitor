@@ -8,6 +8,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import Endpoint from "@/Components/Endpoint.vue";
 import EmailNotifications from "@/Components/EmailNotifications.vue";
+import { Inertia } from "@inertiajs/inertia";
 
 const page = usePage()
 
@@ -29,6 +30,12 @@ const createEndpoint = () => {
             endpointForm.reset()
         }
     })
+}
+
+const deleteSite = () => {
+    if (window.confirm('Are you sure?')) {
+        Inertia.delete(`/sites/${props.site.data.id}`);
+    }
 }
 </script>
 
@@ -126,7 +133,7 @@ const createEndpoint = () => {
                 </div>
 
                 <div class="mt-8">
-                    <button class="text-red-500 text-sm">Delete site</button>
+                    <button class="text-red-500 text-sm" v-on:click="deleteSite">Delete site</button>
                 </div>
             </div>
         </div>
