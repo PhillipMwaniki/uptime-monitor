@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\EndpointRecovered;
 use App\Events\EndpointWentDown;
 use App\Listeners\SendDownEmailNotification;
+use App\Listeners\SendRecoveredEmailNotification;
 use App\Models\Check;
 use App\Models\Endpoint;
 use App\Models\Site;
@@ -29,6 +31,10 @@ class EventServiceProvider extends ServiceProvider
 
         EndpointWentDown::class => [
             SendDownEmailNotification::class,
+        ],
+
+        EndpointRecovered::class => [
+            SendRecoveredEmailNotification::class,
         ],
     ];
 

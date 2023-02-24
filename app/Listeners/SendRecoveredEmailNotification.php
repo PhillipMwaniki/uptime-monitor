@@ -28,6 +28,7 @@ class SendRecoveredEmailNotification
      */
     public function handle($event)
     {
+        \Log::info('sending email');
         collect($event->check->endpoint->site->notification_emails)->each(static function($email) use ($event) {
             \Log::info('email: '. $email);
             Notification::route('mail', $email)

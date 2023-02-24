@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Endpoint;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,7 +17,7 @@ class EndpointRecoveredNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Endpoint $endpoint)
     {
         //
     }
