@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\EndpointRecovered;
 use App\Events\EndpointWentDown;
 use App\Models\Check;
 
@@ -17,7 +18,7 @@ class CheckObserver
 
         if ($check->isSuccessful() &&
             !$check->previous()?->isSuccessful() && $check->endpoint->checks->count() >= 1){
-
+            EndpointRecovered::dispatch($check);
         }
     }
 }
